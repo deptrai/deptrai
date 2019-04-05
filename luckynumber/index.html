@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lucky number</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script>var MAX = "150";
+            var RANDOM = "?????";
+            function formatNumberLength(num, length) {
+                var r = "" + num;
+                while (r.length < length) {
+                    r = "0" + r;
+                }
+                return r;
+            }
+            function randomNumber(max) {
+                //random from 1 to max
+                var tmp = Math.floor(Math.random() * max) + 1;
+                return formatNumberLength(tmp, MAX.length);
+            }
+            function setContent(id, html) {
+                var x = document.getElementById(id);
+                x.innerHTML = html;
+            }
+            function afterDelay(id, html) {
+                setContent(id, html);
+                document.getElementById("b" + id).disabled = false;
+            }
+            function delay(id, time) {
+                if (id === 0) {
+                    RANDOM = randomNumber(parseInt(MAX));
+                }
+                document.getElementById("b" + id).disabled = true;
+                //HIỂN THỊ ẢNH CHỜ VÀ NHẠC
+                setContent(id, "<img id=\"i" + id + "\"src=\"countdown" + id + ".gif\" height=\"130\"><embed src=\"sound.mp3\" hidden=true autostart=true loop=false>");
+                document.getElementById("i" + id).src = "countdown" + id + ".gif";
+                setTimeout(afterDelay, time, id, RANDOM[id]);
+            }
+            //Download source code free tai Sharecode.vn
+        </script>
+        <style>
+            .text {
+                font-size:130px;
+                font-weight:bold;
+                color:white;
+                font-family:Tahoma;
+                text-shadow:5px 5px 20px #444444;
+            }
+            .button {
+                width:170px;
+                height:170px;
+                background:url('btn.png');
+                border:none;
+            }
+            .button:hover {
+                cursor:pointer;
+            }
+        </style>
+    </head>   
+    <body >    
+        <img src="bg.png" style="width:100%"/>
+        <table style="text-align: center; margin-top:-450px;"></table>
+        <script>
+            document.write("<table style=\"width: 100%;text-align: center\" >");
+            var tmp1 = "", tmp2 = "";
+            for (var i = 0; i < MAX.length; i++)
+            {
+                tmp1 += "<td  class=\"text\" id = \"" + i + "\">" + RANDOM[i] + "</td>";
+                tmp2 += "<td><input type=\"button\" class=\"button\" value=\"\" onclick=\"delay("
+                        + i + ",5000)\" id =\"b" + i + "\"/></td>";
+            }
+            document.writeln("<tr>" + tmp1 + "</tr>");
+            document.writeln("<tr>" + tmp2 + "</tr></table>")
+            //Download source code free tai Sharecode.vn
+        </script>          
+    </body>
+</html>
